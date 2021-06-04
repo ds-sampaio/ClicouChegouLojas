@@ -22,11 +22,11 @@ const initialState = {
     telefone: '',
     razao_social: '',
     status: '',
-    password: '',
+    password: '123456',
     cnpj_cpf: '',
     email: 'daiane@gmail.com',
     status: '',
-    password: '123456',
+    password: '',
     confirmPassword: '',
     stageNew: false
 }
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
       paddingHorizontal: 24,
       fontSize: 16,
       alignItems: 'stretch',
-      borderColor: '#8b008b',
+      borderColor: '#663399',
       borderWidth: 2,      
     },
     formcontainer :{
@@ -252,7 +252,7 @@ const styles = StyleSheet.create({
         fontSize: 20        
     },
     button: {
-        backgroundColor: '#8b008b',
+        backgroundColor: '#663399',
         marginTop: 10,
         padding: 10,
         alignItems: 'center',
@@ -266,7 +266,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     buttonConta: {
-        color: '#8b008b',
+        color: '#663399',
         fontSize: 15        
     },
 })

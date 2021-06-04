@@ -2,10 +2,13 @@ import React from 'react'
 import { NavigationContainer } from '@react-navigation/native';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from 'react-native'
  
 import Auth from './screens/Auth'
 import PedidoList from './screens/PedidoList'
 import ProdutoList from './screens/ProdutoList'
+import FormProduto from './screens/FormProduto'
+import Loja from './screens/Loja'
 
 
 import Menu from './screens/Menu'
@@ -30,6 +33,15 @@ const menuConfig = {
 const Drawer = createDrawerNavigator();
 const Stack = createStackNavigator();
 
+
+function Root() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen name="ProdutoList" component={ProdutoList} />
+        <Stack.Screen name="FormProduto" component={FormProduto} />
+      </Stack.Navigator>
+    );
+  }
  
 const DrawerNavigator = props => {
     const { email, razao_social } = props.route.params
@@ -38,9 +50,13 @@ const DrawerNavigator = props => {
             <Drawer.Screen name="Hoje" options={{ title: 'Tela Inicial' }}>
                 {props => <PedidoList {...props} title='Hoje' daysAhead={0} />}
             </Drawer.Screen>
-            <Drawer.Screen name="ProdutoList" options={{ title: 'ProdutoList' }}>
+            <Drawer.Screen name="Root" options={{ title: 'Produtos' }}>
                 {props => <ProdutoList {...props} title='ProdutoList' daysAhead={0} />}
             </Drawer.Screen>
+            <Drawer.Screen name="loja" options={{ title: 'Loja' }}>
+            {props => <Loja {...props} title='ProdutoList' daysAhead={0} />}
+            </Drawer.Screen>
+          
         </Drawer.Navigator>
     );
 };
@@ -49,8 +65,10 @@ const AuthNavigator = () => {
     return (
         <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Auth" component={Auth} />
-            <Stack.Screen name="Home" component={DrawerNavigator} />
-            <Stack.Screen name="ProdutoList" component={DrawerNavigator} />
+            <Stack.Screen name="Home" component={DrawerNavigator} /> 
+            <Stack.Screen name="Root" component={DrawerNavigator} /> 
+            <Stack.Screen name="FormProduto" component={FormProduto} />
+            <Stack.Screen name="Loja" component={DrawerNavigator} /> 
         </Stack.Navigator>
     );
 };

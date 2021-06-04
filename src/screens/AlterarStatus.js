@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.7)'
     }    ,
     container: {
-        backgroundColor: '#000',
+        backgroundColor: '#FFF',
     }   , 
     header: {
         // backgroundColor: '#8fbc8f',
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     texto: {
         fontSize: 15, 
         marginLeft: 5,
-        color: '#FFF',
+        color: '#000',
     }
   
 })

@@ -19,16 +19,24 @@ import 'moment/locale/pt-br'
 
 import { server, showError} from '../common'
 import Produto from '../component/Produto'
+import FormProduto from './FormProduto'
 
 const initialState = {
     produtos: [],
-    pedido: null
+    pedido: null,
+    produto: null,
 }
 
 export default class ProdutoList extends Component {  
     
     state = {
         ...initialState
+    }
+
+    constructor(props){
+        super(props);
+
+        this.state = { produtos: [] };
     }
     
 
@@ -45,6 +53,33 @@ export default class ProdutoList extends Component {
         this.loadProdutos()
     }
 
+    componentWillUnmount () {
+        this.loadProdutos()
+      }
+
+    loadFormproduto = async  pedidoid => {
+        const produtos = [...this.state.produtos]
+        let produto = produtos.find(value => {
+            return value.id_produtos === pedidoid
+        })
+        this.setState(produto)
+        //  console.warn(produto.id_loja)
+
+        this.props.navigation.navigate('FormProduto', produto)
+        // this.loadProdutos() tentativa de atualizar a lista,mas n funcionou
+    }
+
+    Deleteproduto = async produtoid => {
+        try {
+            await axios.delete(`${server}/produtos/${produtoid}`)
+            this.loadProdutos()
+            // this.props.navigation.navigate('FormProduto', produto)
+        } catch(e) {
+            showError(e)
+        }
+    }
+
+
     render() {        
         return (                
                 <View style={styles.container}>                  
@@ -56,7 +91,7 @@ export default class ProdutoList extends Component {
                             <Text style={styles.Header}>
                                 Produtos
                             </Text> 
-                            <TouchableOpacity onPress={() => console.warn('chamar cadastro de produto')}>
+                            <TouchableOpacity onPress={() => this.props.navigation.navigate('FormProduto', {type: 'cadastro'})}>
                                 <Icon name='add' size={27} color='#FFF' />
                             </TouchableOpacity>                            
                         </View>                                          
@@ -64,7 +99,7 @@ export default class ProdutoList extends Component {
                     <View style={styles.produtoList}>                 
                        <FlatList data={this.state.produtos}
                             keyExtractor={item => `${item.id_produtos}`}
-                            renderItem={({item}) => <Produto {...item} /> } 
+                            renderItem={({item}) =>  <Produto {...item} onloadFormproduto={this.loadFormproduto}  onDeleteproduto={this.Deleteproduto}/> } 
                        />
                     </View>
                     

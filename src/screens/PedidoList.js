@@ -30,20 +30,6 @@ const initialState = {
 }
 
 export default class PedidoList extends Component {
-    // state = {
-    //     showdonePedidos: true,
-    //     showAlteraStatus: false,
-    //     visiblePedidos: [],
-    //     pedidos : [{
-    //         id: Math.random(),
-    //         desc: 'Pedido Gás',
-    //         doneAt: new Date(),
-    //     }, {
-    //         id: Math.random(),
-    //         desc: 'Pedido de Agua',
-    //         doneAt: new Date(),
-    //     }]
-    // }
 
     state = {
         ...initialState
@@ -57,7 +43,7 @@ export default class PedidoList extends Component {
         this._drawer.open()
       };
 
-       
+    // Metodo que puxa todos os pedidos do banco de dados  
     loadTasks = async () => {
           try {
             // const maxDate = moment()
