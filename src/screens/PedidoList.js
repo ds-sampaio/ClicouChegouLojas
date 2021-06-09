@@ -19,6 +19,7 @@ import 'moment/locale/pt-br'
 import { server, showError} from '../common'
 import Pedido from '../component/Pedido'
 import AlterarStatus from './AlterarStatus'
+import ItensPedido from './ItensPedido'
 
 const initialState = {
     showdonePedidos: true,
@@ -137,7 +138,7 @@ export default class PedidoList extends Component {
     }
 
    
-    render() {
+    render() {        
         const today = moment().locale('pt-br').format('ddd,D [de] MMMM')
         return (                
                 <View style={styles.container}>
@@ -154,15 +155,21 @@ export default class PedidoList extends Component {
                                 cidade={this.state.pedido.cidade}
                                 nome={this.state.pedido.nome}
                                 isVisible={this.state.showAlteraStatus}
+                                id_usuario={this.state.pedido.id_cliente}
                                 onChangeText={text => this.setState({status: text})}
                             onCancel={() => this.setState({ showAlteraStatus: false })}
                             onSalvar={() => {
                                 this.togglePedido(this.state.pedido.id_pedido)
                                 this.setState({ showAlteraStatus: false })
-                                }
-                            }/>
-                        ) : null
-                    }
+                                }                               
+                            }
+                            onProdutos={() => {                                
+                                this.props.navigation.navigate('ItensPedido',this.state.pedido.id_cliente)   
+                                this.setState({ showAlteraStatus: false })                               
+                               }
+                            } />
+                        ) : null         
+                    }   
 
                     <View style={styles.cabecalho}>                        
                          <View style={styles.iconBar}>

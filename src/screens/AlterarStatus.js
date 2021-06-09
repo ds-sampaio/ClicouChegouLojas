@@ -9,6 +9,8 @@ import {
          TextInput
         } from 'react-native'
 
+
+
 const initialState = { desc: '' }
 
 export default class AlterarStatus extends Component {
@@ -16,10 +18,10 @@ export default class AlterarStatus extends Component {
     state ={
         ...initialState  
       
-    }    
+    } 
+    
 
     render () {
-
         return (            
             <Modal transparent={true}  visible={this.props.isVisible}
                 onRequestClose={this.props.onCancel}
@@ -48,8 +50,11 @@ export default class AlterarStatus extends Component {
                        placeholder="Informe status..."
                        onChangeText={this.props.onChangeText}
                        value={this.props.status}
-                       ></TextInput>  
-                    <View style={styles.buttons}>                        
+                    ></TextInput>  
+                    <View style={styles.buttons}> 
+                        <TouchableOpacity onPress={this.props.onProdutos}>
+                            <Text style={styles.button}>Produtos</Text>
+                        </TouchableOpacity>                       
                         <TouchableOpacity onPress={this.props.onCancel}> 
                             <Text style={styles.button}>Cancelar</Text>
                         </TouchableOpacity>

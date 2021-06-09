@@ -45,7 +45,7 @@ export default class FormProduto extends Component {
         } catch(e) {
             showError(e)
         }
-  }
+   }
 
     async handleButtonPress(){ 
         console.warn(this.state.descricao)

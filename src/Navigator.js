@@ -9,6 +9,7 @@ import PedidoList from './screens/PedidoList'
 import ProdutoList from './screens/ProdutoList'
 import FormProduto from './screens/FormProduto'
 import Loja from './screens/Loja'
+import ItensPedido from './screens/ItensPedido'
 
 
 import Menu from './screens/Menu'
@@ -38,7 +39,7 @@ function Root() {
     return (
       <Stack.Navigator>
         <Stack.Screen name="ProdutoList" component={ProdutoList} />
-        <Stack.Screen name="FormProduto" component={FormProduto} />
+        <Stack.Screen name="FormProduto" component={FormProduto} />       
       </Stack.Navigator>
     );
   }
@@ -69,6 +70,7 @@ const AuthNavigator = () => {
             <Stack.Screen name="Root" component={DrawerNavigator} /> 
             <Stack.Screen name="FormProduto" component={FormProduto} />
             <Stack.Screen name="Loja" component={DrawerNavigator} /> 
+            <Stack.Screen name="ItensPedido" component={ItensPedido} />
         </Stack.Navigator>
     );
 };
