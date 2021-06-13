@@ -29,9 +29,15 @@ export default props => {
             
             <TouchableWithoutFeedback 
                onPress={() => props.toggleStatus(props.id_pedido)}>
-                <View>                    
-                    <Text style={[styles.desc,doneOrNotStyle]}>{props.descricao}</Text>
-                    <Text style={[styles.desc,doneOrNotStyle]}>{props.nome}</Text>
+                <View>     
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={[styles.desc,doneOrNotStyle]}>Pedido de Nº: </Text>
+                        <Text style={[styles.desc,doneOrNotStyle]}>{props.id_pedido}</Text>     
+                    </View>    
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={[styles.desc,doneOrNotStyle]}>Cliente: </Text>
+                        <Text style={[styles.desc,doneOrNotStyle]}>{props.nome}</Text>   
+                    </View>                                                            
                     <Text style={styles.date}>{date}</Text>
                 </View>  
             </TouchableWithoutFeedback>          

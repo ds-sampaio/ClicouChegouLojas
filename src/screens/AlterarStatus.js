@@ -33,10 +33,10 @@ export default class AlterarStatus extends Component {
                 <View style={styles.container}>
                     <Text style={styles.header}> Status do Pedido</Text>
                     <Text style={styles.texto}>{this.props.nome}</Text>
-                    <View style={{flexDirection:'row'}}>
+                    {/* <View style={{flexDirection:'row'}}>
                         <Text style={styles.texto}>Item:</Text>
                         <Text style={styles.texto}>{this.props.descricao}</Text>
-                    </View>
+                    </View> */}
                     
                     <View style={{flexDirection:'row'}}> 
                         <Text style={styles.texto}>{this.props.logradouro}</Text>

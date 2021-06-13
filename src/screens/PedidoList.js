@@ -52,7 +52,7 @@ export default class PedidoList extends Component {
             //     .format('YYYY-MM-DD 23:59:59')
             // const res = await axios.get(`${server}/pedidos?date=${maxDate}`)
             const maxDate = moment().endOf('day').toDate()
-            const res = await axios.get(`${server}/pedidoloja`)
+            const res = await axios.get(`${server}/vendas`) //pedidoloja
             // console.warn(res.data)
             this.setState({pedidos: res.data})
           } catch(e) {
@@ -64,13 +64,28 @@ export default class PedidoList extends Component {
         this.setState({showdonePedidos: !this.state.showdonePedidos}, this.filterPedidos())
     }
 
+    // togglePedido = async  pedidoid => {
+    //     try {
+    //         console.warn(pedidoid)
+    //          await axios.put(`${server}/pedidos/${pedidoid}`,{  
+    //             id_pedido: pedidoid,                
+    //             id_cliente: this.state.id_cliente,
+    //             id_produtos: this.state.id_produtos,   
+    //             status: this.state.status,
+    //         })
+    //         await this.loadTasks()
+    //     } catch(e) {
+    //         showError(e)
+    //     }
+    // }
     togglePedido = async  pedidoid => {
         try {
-            console.warn(pedidoid)
-            await axios.put(`${server}/pedidos/${pedidoid}`,{
-                id_pedido: pedidoid,                
-                id_cliente: this.state.id_cliente,
-                id_produtos: this.state.id_produtos,   
+            const pedidos = [...this.state.pedidos]
+            let pedido = pedidos.find(value => {
+                return value.id_pedido === pedidoid
+            })
+            console.warn(pedido.id_cliente)
+            await axios.put(`${server}/vendas/${pedido.id_cliente}`,{ 
                 status: this.state.status,
             })
             await this.loadTasks()
@@ -85,13 +100,17 @@ export default class PedidoList extends Component {
             let pedido = pedidos.find(value => {
                 return value.id_pedido === pedidoid
             })
-            // console.warn(!pedido.fechou)
-            await axios.put(`${server}/pedidos/${pedidoid}`,{
-                id_pedido: pedidoid,                
-                id_cliente: this.state.id_cliente,
-                id_produtos: this.state.id_produtos,
+            await axios.put(`${server}/vendas/${pedido.id_cliente}`,{ 
                 fechou: !pedido.fechou,
             })
+
+            // console.warn(!pedido.fechou)
+            // await axios.put(`${server}/pedidos/${pedidoid}`,{
+            //     id_pedido: pedidoid,                
+            //     id_cliente: this.state.id_cliente,
+            //     id_produtos: this.state.id_produtos,
+            //     fechou: !pedido.fechou,
+            // })
             await this.loadTasks()
         } catch(e) {
             showError(e)
@@ -164,7 +183,7 @@ export default class PedidoList extends Component {
                                 }                               
                             }
                             onProdutos={() => {                                
-                                this.props.navigation.navigate('ItensPedido',this.state.pedido.id_cliente)   
+                                this.props.navigation.navigate('ItensPedido',this.state.pedido)   
                                 this.setState({ showAlteraStatus: false })                               
                                }
                             } />

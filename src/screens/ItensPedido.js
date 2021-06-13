@@ -34,7 +34,8 @@ export default class ProdutoList extends Component {
         
         try {                    
           const res = await axios.post(`${server}/itenspedidos`,{
-            id_usuario: this.props.route.params
+            id_usuario: this.props.route.params.id_usuario,
+            fechou: this.props.route.params.fechou
         })         
           this.setState({produtos: res.data})
         } catch(e) {
@@ -47,10 +48,16 @@ export default class ProdutoList extends Component {
     }
 
     render () {
-
+        // console.warn(this.props.route.params.fechou)
         return (  
-            <View>
-                <Text style={styles.title}>Listagem de Itens</Text> 
+            <View>                 
+                <View style={styles.group}>
+                  <View style={{flexDirection:'row'}}>
+                    <Text style={styles.texto}>Cliente:</Text>
+                    <Text style={styles.texto}>{this.props.route.params.nome}</Text> 
+                  </View> 
+                </View>
+                <Text style={styles.title}>Produtos solicitados:</Text>                               
                 <View style={styles.item}>
                 <FlatList data={this.state.produtos}
                 keyExtractor={item => `${item.id_pedido}`}
@@ -59,9 +66,9 @@ export default class ProdutoList extends Component {
             </View>
             
         )
-    }
+    } 
 }
-
+ 
 const styles = StyleSheet.create({
     container: {
       flex: 1,
@@ -75,10 +82,24 @@ const styles = StyleSheet.create({
       borderRadius: 10,
     },
     title: {
-      fontSize: 30,
+      fontSize: 25,
+      // alignItems: 'center',
+      // justifyContent: 'center',
+      color:  '#663399',
+       marginLeft: '5%',
+    },   
+    texto: {
+      fontSize: 20,
       alignItems: 'center',
       justifyContent: 'center',
-      color:  '#663399',
+      color:  '#FFF',
       marginLeft: '10%',
-    },   
+    },
+    group: {
+      backgroundColor: '#000',
+      padding: 20,
+      marginVertical: 8,
+      marginHorizontal: 16,
+      borderRadius: 10,
+    },
   });
