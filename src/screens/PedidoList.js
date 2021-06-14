@@ -156,6 +156,10 @@ export default class PedidoList extends Component {
         this.setState({ visiblePedidos })
     }
 
+    atualizatela = () => {
+        this.filterPedidos()
+        this.loadTasks()
+    }
    
     render() {        
         const today = moment().locale('pt-br').format('ddd,D [de] MMMM')
@@ -209,7 +213,12 @@ export default class PedidoList extends Component {
                         
                         
                         <Text style={styles.title}>Hoje</Text>
-                        <Text style={styles.subtitle}>{today}</Text>
+                        <View style={{flexDirection:'row'}}>
+                           <Text style={styles.subtitle}>{today}</Text>
+                           <TouchableOpacity style={styles.atualiza} onPress={() => this.atualizatela()}>
+                                <Icon name='rotate-right' size={27} color='#FFF' />
+                            </TouchableOpacity>
+                        </View>                        
                     </View>
                  
                     <View style={styles.pedidoList}>
@@ -267,5 +276,8 @@ const styles = StyleSheet.create({
     cabecalho: {
         backgroundColor: '#663399', //'#ffd700', 
         flex: 3,
+    },
+    atualiza: {
+        marginLeft: 170,
     }
 })

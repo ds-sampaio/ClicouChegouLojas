@@ -10,6 +10,7 @@ import ProdutoList from './screens/ProdutoList'
 import FormProduto from './screens/FormProduto'
 import Loja from './screens/Loja'
 import ItensPedido from './screens/ItensPedido'
+import ListHistorico from './screens/ListHistorico'
 
 
 import Menu from './screens/Menu'
@@ -57,6 +58,9 @@ const DrawerNavigator = props => {
             <Drawer.Screen name="loja" options={{ title: 'Loja' }}>
             {props => <Loja {...props} title='ProdutoList' daysAhead={0} />}
             </Drawer.Screen>
+            <Drawer.Screen name="ListHistorico" options={{ title: 'Histórico' }}>
+            {props => <ListHistorico {...props} title='Histórico' daysAhead={0} />}
+            </Drawer.Screen>
           
         </Drawer.Navigator>
     );
@@ -71,6 +75,7 @@ const AuthNavigator = () => {
             <Stack.Screen name="FormProduto" component={FormProduto} />
             <Stack.Screen name="Loja" component={DrawerNavigator} /> 
             <Stack.Screen name="ItensPedido" component={ItensPedido} />
+            <Stack.Screen name="ListHistorico" component={ListHistorico} />
         </Stack.Navigator>
     );
 };
