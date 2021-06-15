@@ -236,7 +236,7 @@ export default class PedidoList extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,     
+        flex: 7,     
     },
     Header: {
         fontSize: 28,

@@ -37,7 +37,7 @@ export default props => {
                                 >                        
                             </Avatar>                                                                   
                         </View>
-                        <View style={{flexDirection:'row'}}> 
+                        <View style={{flexDirection:'row',width:'90%' ,justifyContent: 'space-between',alignItems:'center'}}> 
                             <TouchableWithoutFeedback onPress={() => props.onloadFormproduto(props.id_produtos)}>                        
                                 <View>
                                     <Text style={styles.desc}>{props.descricao}</Text>
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
         marginLeft: 10,
     },
     navBarLeftButton: {
-        paddingLeft: 8,   
-        flexDirection: 'row',        
-        justifyContent: 'flex-end'
+        //  paddingEnd: '20%',   
+        // flexDirection: 'row',        
+        justifyContent: 'space-between',
       }
 })

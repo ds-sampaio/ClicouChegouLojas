@@ -111,7 +111,7 @@ export default class FormProduto extends Component {
                         placeholder="Preço"
                         onChangeText={value => this.setState({preco: value})}
                         keyboardType="numeric"
-                        value={this.state.preco}
+                        value={this.state.preco.toString()}
                     ></TextInput>  
                     <Text style={styles.text}>Imagem</Text>  
                     <TextInput style={styles.input}

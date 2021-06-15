@@ -7,7 +7,8 @@ import {
     FlatList,
     TouchableOpacity,
     Platform,
-    Alert
+    Alert,
+    ScrollView
 } from 'react-native'
 
 // import Icon from 'react-native-vector-icons/FontAwesome'
@@ -51,6 +52,7 @@ export default class ProdutoList extends Component {
 
     componentDidMount = () => {
         this.loadProdutos()
+        this.props.navigation.addListener('focus', ()=> this.loadProdutos())
     }
 
     componentWillUnmount () {
@@ -73,7 +75,7 @@ export default class ProdutoList extends Component {
         try {
             await axios.delete(`${server}/produtos/${produtoid}`)
             this.loadProdutos()
-            // this.props.navigation.navigate('FormProduto', produto)
+            //this.props.navigation.navigate('FormProduto', produto)
         } catch(e) {
             showError(e)
         }
@@ -81,8 +83,9 @@ export default class ProdutoList extends Component {
 
 
     render() {        
-        return (                
-                <View style={styles.container}>                  
+        return (  
+            // <ScrollView>
+                 <View style={styles.container}>                  
                     <View style={styles.cabecalho}>                              
                         <View style={[styles.iconBar ,{flexDirection:'row'}]}>                              
                             <TouchableOpacity onPress={() => this.props.navigation.openDrawer()}>
@@ -98,6 +101,7 @@ export default class ProdutoList extends Component {
                     </View>                 
                     <View style={styles.produtoList}>                 
                        <FlatList data={this.state.produtos}
+                            onEndReachedThreshold={0.1}
                             keyExtractor={item => `${item.id_produtos}`}
                             renderItem={({item}) =>  <Produto {...item} onloadFormproduto={this.loadFormproduto}  onDeleteproduto={this.Deleteproduto}/> } 
                        />
@@ -105,6 +109,9 @@ export default class ProdutoList extends Component {
                     
                     
                 </View>
+            // </ScrollView>  
+            
+               
         )
     }
 }
